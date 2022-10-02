@@ -67,7 +67,7 @@ export const Signup = ({ appid, setAppid }) => {
   return (
     <Container>
       <Card color="secondary">
-        <Typography variant="h2">RUCKUS!</Typography>
+        <Typography variant="h2" onClick={() => redirect("/")}>RUCKUS!</Typography>
         <Typography variant="p" fontWeight={"bold"}>
           Sign Up
         </Typography>
