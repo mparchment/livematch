@@ -145,22 +145,49 @@ export const Home = ({ appid, setAppid }) => {
               {selectedEvents.map((event, index) => (
                 <Collapse.Panel key={index} header={<Text>{event.title}</Text>}>
                   <Text>{event.description}</Text>
-                  {!event.attendees.includes(appid) && (
+                  {!event.attendees.includes(appid) ? (
                     <Button
                       style={{
                         marginBotton: 23,
                       }}
-                      onClick={() => setIsModalOpen(true)}
+                      onClick={() => {
+                        const requestOptions = {
+                          method: "PUT",
+                          headers: { "Content-Type": "application/json" },
+                          body: {
+                            event_id: event._id,
+                            user_id: appid,
+                          },
+                        };
+                        //api.retrieverruck.us
+                        fetch(
+                          `http://api.retrieverruck.us/events/join`,
+                          requestOptions
+                        );
+                      }}
                     >
                       <Typography fontSize={14}>Join</Typography>
                     </Button>
-                  )}
-                  {event.owner === appid ? (
+                  ) : event.owner === appid ? (
                     <Button
                       style={{
                         marginBotton: 23,
                       }}
-                      onClick={() => setIsModalOpen(true)}
+                      onClick={() => {
+                        const requestOptions = {
+                          method: "DELETE",
+                          headers: { "Content-Type": "application/json" },
+                          body: {
+                            event_id: event._id,
+                            user_id: event.owner,
+                          },
+                        };
+                        //api.retrieverruck.us
+                        fetch(
+                          `http://api.retrieverruck.us/events/delete`,
+                          requestOptions
+                        );
+                      }}
                     >
                       <Typography fontSize={14}>Delete</Typography>
                     </Button>
@@ -169,7 +196,21 @@ export const Home = ({ appid, setAppid }) => {
                       style={{
                         marginBotton: 23,
                       }}
-                      onClick={() => setIsModalOpen(true)}
+                      onClick={() => {
+                        const requestOptions = {
+                          method: "PUT",
+                          headers: { "Content-Type": "application/json" },
+                          body: {
+                            event_id: event._id,
+                            user_id: appid,
+                          },
+                        };
+                        //api.retrieverruck.us
+                        fetch(
+                          `http://api.retrieverruck.us/events/leave`,
+                          requestOptions
+                        );
+                      }}
                     >
                       <Typography fontSize={14}>Leave</Typography>
                     </Button>
