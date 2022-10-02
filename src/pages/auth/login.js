@@ -66,7 +66,9 @@ export const Login = ({ appid, setAppid }) => {
   return (
     <Container>
       <Card color="secondary">
-        <Typography variant="h3" onClick={() => redirect("/")}>RUCKUS!</Typography>
+        <Typography variant="h3" onClick={() => navigate("/")}>
+          RUCKUS!
+        </Typography>
         <Typography variant="p" fontWeight={"bold"}>
           Log In
         </Typography>
