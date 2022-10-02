@@ -154,10 +154,10 @@ export const Home = ({ appid, setAppid }) => {
                         const requestOptions = {
                           method: "PUT",
                           headers: { "Content-Type": "application/json" },
-                          body: {
+                          body: JSON.stringify({
                             event_id: event._id,
                             user_id: appid,
-                          },
+                          }),
                         };
                         //api.retrieverruck.us
                         fetch(
@@ -177,10 +177,10 @@ export const Home = ({ appid, setAppid }) => {
                         const requestOptions = {
                           method: "DELETE",
                           headers: { "Content-Type": "application/json" },
-                          body: {
+                          body: JSON.stringify({
                             event_id: event._id,
                             user_id: event.owner,
-                          },
+                          }),
                         };
                         //api.retrieverruck.us
                         fetch(
@@ -200,10 +200,10 @@ export const Home = ({ appid, setAppid }) => {
                         const requestOptions = {
                           method: "PUT",
                           headers: { "Content-Type": "application/json" },
-                          body: {
+                          body: JSON.stringify({
                             event_id: event._id,
                             user_id: appid,
-                          },
+                          }),
                         };
                         //api.retrieverruck.us
                         fetch(
