@@ -88,7 +88,7 @@ export const Home = ({ appid, setAppid }) => {
     };
     //api.retrieverruck.us
     fetch(
-      `http://localhost:3002/events/location?location_id=${location_id}`,
+      `http://api.retrieverruck.us/events/location?location_id=${location_id}`,
       requestOptions
     )
       .then((response) => response.json())
