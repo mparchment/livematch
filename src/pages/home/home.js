@@ -5,7 +5,7 @@ import styled from "styled-components";
 import "antd/dist/antd.css";
 import { Button, Spin, Collapse, Drawer, Typography, Modal } from "antd";
 import { useNavigate } from "react-router-dom";
-import { TextField } from "@mui/material";
+import { Typography as TypographyMui } from "@mui/material";
 
 const { Text } = Typography;
 
@@ -30,6 +30,24 @@ const LogoutButton = styled(Button)({
   top: 10,
   right: 10,
   zIndex: 10000,
+  fontFamily: "Montserrat",
+  fontSize: 14,
+  fontWeight: 600,
+  borderRadius: 7,
+  opacity: 0.7,
+  ":hover": {
+    opacity: 1,
+  },
+});
+
+const EventDescContainer = styled(`div`)({
+  display: "flex",
+  height: "100%",
+  flexDirection: "column",
+  gap: 10,
+  marginTop: 50,
+  marginBottom: 30,
+  width: "100%",
 });
 
 export const Home = ({ appid, setAppid }) => {
@@ -86,15 +104,16 @@ export const Home = ({ appid, setAppid }) => {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     };
-    //api.retrieverruck.us
     fetch(
       `https://api.retrieverruck.us/events/location?location_id=${location_id}`,
       requestOptions
     )
       .then((response) => response.json())
       .then((data) => {
-        setSelectedEvents(data.message ? [] : data);
-      });
+        console.log(data);
+        setSelectedEvents(data.message !== undefined ? [] : data);
+      })
+      .catch((err) => console.log(err));
   };
 
   if (location.lat === 0 && location.lon === 0) {
@@ -107,6 +126,20 @@ export const Home = ({ appid, setAppid }) => {
 
   return (
     <Container>
+      <TypographyMui
+        variant="h5"
+        fontFamily={"Montserrat"}
+        fontWeight="800"
+        style={{
+          textShadow: `2px 2px #fdb515`,
+          position: "fixed",
+          top: 10,
+          left: 20,
+          zIndex: 1000,
+        }}
+      >
+        RUCK.US!
+      </TypographyMui>
       <Map
         location={location}
         fields={fields}
@@ -114,6 +147,8 @@ export const Home = ({ appid, setAppid }) => {
         setSelectedEvents={getSelectedEvents}
       />
       <LogoutButton
+        danger
+        type="primary"
         onClick={() => {
           localStorage.removeItem("appid");
           setAppid("");
@@ -132,23 +167,33 @@ export const Home = ({ appid, setAppid }) => {
             open={open}
             key={"bottom"}
           >
-            <Button
-              style={{
-                marginBotton: 23,
-              }}
-              onClick={() => setIsModalOpen(true)}
-            >
-              <Typography fontSize={14}>Create Event</Typography>
-            </Button>
-
             <Collapse>
               {selectedEvents.map((event, index) => (
-                <Collapse.Panel key={index} header={<Text>{event.title}</Text>}>
-                  <Text>{event.description}</Text>
+                <Collapse.Panel
+                  key={index}
+                  header={<Text>{event.title}</Text>}
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <EventDescContainer>
+                    <TypographyMui>{event.description}</TypographyMui>
+                    <TypographyMui>
+                      {new Date(event.date_time).toISOString()}
+                    </TypographyMui>
+                    <TypographyMui>{event.date_time}</TypographyMui>
+                    <TypographyMui>
+                      {parseInt(event.duration * 60)} min
+                    </TypographyMui>
+                    <TypographyMui>
+                      Attendees: {event.attendees.length}
+                    </TypographyMui>
+                  </EventDescContainer>
                   {!event.attendees.includes(appid) ? (
                     <Button
                       style={{
-                        marginBotton: 23,
+                        marginLeft: "auto",
                       }}
                       onClick={() => {
                         const requestOptions = {
@@ -171,8 +216,9 @@ export const Home = ({ appid, setAppid }) => {
                   ) : event.owner === appid ? (
                     <Button
                       style={{
-                        marginBotton: 23,
+                        marginLeft: "auto",
                       }}
+                      danger
                       onClick={() => {
                         const requestOptions = {
                           method: "DELETE",
@@ -194,7 +240,7 @@ export const Home = ({ appid, setAppid }) => {
                   ) : (
                     <Button
                       style={{
-                        marginBotton: 23,
+                        marginLeft: "auto",
                       }}
                       onClick={() => {
                         const requestOptions = {

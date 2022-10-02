@@ -16,13 +16,15 @@ const Card = styled(CardMui)({
   width: "80%",
   maxWidth: 400,
   maxHeight: 500,
-  minHeight: "40%",
   height: "fit-content",
   padding: 20,
   display: "flex",
   alignItems: "center",
   flexDirection: "column",
   backgroundColor: "grey",
+  boxShadow:
+    "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px !important",
+  borderRadius: "15px !important",
 });
 
 const ButtonContainer = styled(`div`)({
@@ -30,7 +32,6 @@ const ButtonContainer = styled(`div`)({
   alignItems: "center",
   justifyContent: "center",
   height: "100%",
-  flexDirection: "column",
   gap: 5,
   marginTop: 50,
 });
@@ -45,17 +46,37 @@ function Landing({ appid }) {
   return (
     <Container>
       <Card color="secondary">
-        <Typography variant="p" fontWeight={"bold"}>
-          LET'S START A
-        </Typography>
-        <Typography variant="h3">RUCKUS!</Typography>
+        <div>
+          <Typography
+            variant="p"
+            fontFamily={"Montserrat"}
+            fontSize={12}
+            fontWeight="700"
+          >
+            LET'S START A
+          </Typography>
+          <Typography
+            variant="h3"
+            fontFamily={"Montserrat"}
+            fontWeight="bold"
+            style={{
+              textShadow: `2px 2px #fdb515`,
+            }}
+          >
+            RUCK.US!
+          </Typography>
+        </div>
         <ButtonContainer>
           <Button
             variant="contained"
             size="large"
             onClick={() => navigate("/login")}
           >
-            <Typography variant="button" fontSize={14}>
+            <Typography
+              fontFamily={"Montserrat"}
+              variant="button"
+              fontSize={12}
+            >
               Log In
             </Typography>
           </Button>
@@ -64,11 +85,24 @@ function Landing({ appid }) {
             size="large"
             onClick={() => navigate("/signup")}
           >
-            <Typography variant="button" fontSize={14}>
+            <Typography
+              fontFamily={"Montserrat"}
+              variant="button"
+              fontSize={12}
+            >
               Sign Up
             </Typography>
           </Button>
         </ButtonContainer>
+        <Typography
+          variant="p"
+          fontFamily={"Montserrat"}
+          fontSize={11}
+          fontWeight="700"
+          marginTop={3}
+        >
+          Login or Sign in to continue*
+        </Typography>
       </Card>
     </Container>
   );

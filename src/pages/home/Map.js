@@ -6,6 +6,7 @@ import { Icon } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import styled from "styled-components";
 import { Card } from "antd";
+import { Button, Typography } from "@mui/material";
 
 const MapContainer = styled(mp)({
   width: "100%",
@@ -23,7 +24,15 @@ function Map({ location, fields, setOpen, setSelectedEvents }) {
   }, [location]);
 
   return (
-    <MapContainer center={[location.lat, location.lon]} zoom={2} ref={mapRef}>
+    <MapContainer
+      center={[
+        location.lat === 0 ? 39.0458 : location.lat,
+        location.lon === 0 ? 76.6413 : location.lon,
+      ]}
+      zoom={10}
+      ref={mapRef}
+      zoomControl={false}
+    >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -45,24 +54,68 @@ function Map({ location, fields, setOpen, setSelectedEvents }) {
               size="small"
               title={field.name}
               extra={
-                <div
+                <Button
+                  variant="outlined"
+                  size="small"
                   onClick={() => {
                     setOpen(true);
                     setSelectedEvents(field._id);
                   }}
                 >
-                  View Events
-                </div>
+                  <Typography
+                    variant="p"
+                    fontFamily={"Montserrat"}
+                    fontSize={10}
+                    fontWeight="700"
+                  >
+                    View Events
+                  </Typography>
+                </Button>
               }
+              fontFamily={"Montserrat"}
               style={{
                 width: "70vw",
                 maxWidth: 300,
                 border: "none",
               }}
+              bodyStyle={{
+                display: "flex",
+                flexDirection: "column",
+              }}
             >
-              <p>Card content</p>
-              <p>Card content</p>
-              <p>Card content</p>
+              <Typography
+                variant="p"
+                fontFamily={"Montserrat"}
+                fontSize={12}
+                fontWeight="500"
+              >
+                Latitude: {parseFloat(field.location.latitude).toFixed(4)}
+              </Typography>
+              <Typography
+                variant="p"
+                fontFamily={"Montserrat"}
+                fontSize={12}
+                fontWeight="500"
+              >
+                Longitude: {parseFloat(field.location.longitude).toFixed(4)}
+              </Typography>
+              <Typography
+                variant="p"
+                fontFamily={"Montserrat"}
+                fontSize={12}
+                fontWeight="500"
+                marginTop={3}
+              >
+                Max Events: {field.max_events}
+              </Typography>
+              <Typography
+                variant="p"
+                fontFamily={"Montserrat"}
+                fontSize={12}
+                fontWeight="500"
+              >
+                Open Events: {field.events.filter((el) => el !== "").length}
+              </Typography>
             </Card>
           </Popup>
         </Marker>
