@@ -1,17 +1,11 @@
-body {
-  padding: 0;
-  margin: 0;
-}
 
-html, body {
+html, body, #root {
   height: 100%;
-  width: 100vw;
-}
-
-.map-container {
-  position: absolute;
-  height: 100vh;
-  width: 100vw;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
 }
 
 html, body { overflow: hidden }
