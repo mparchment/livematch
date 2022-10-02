@@ -88,7 +88,7 @@ export const Home = ({ appid, setAppid }) => {
     };
     //api.retrieverruck.us
     fetch(
-      `http://api.retrieverruck.us/events/location?location_id=${location_id}`,
+      `https://api.retrieverruck.us/events/location?location_id=${location_id}`,
       requestOptions
     )
       .then((response) => response.json())
@@ -161,7 +161,7 @@ export const Home = ({ appid, setAppid }) => {
                         };
                         //api.retrieverruck.us
                         fetch(
-                          `http://api.retrieverruck.us/events/join`,
+                          `https://api.retrieverruck.us/events/join`,
                           requestOptions
                         );
                       }}
@@ -184,7 +184,7 @@ export const Home = ({ appid, setAppid }) => {
                         };
                         //api.retrieverruck.us
                         fetch(
-                          `http://api.retrieverruck.us/events/delete`,
+                          `https://api.retrieverruck.us/events/delete`,
                           requestOptions
                         );
                       }}
@@ -207,7 +207,7 @@ export const Home = ({ appid, setAppid }) => {
                         };
                         //api.retrieverruck.us
                         fetch(
-                          `http://api.retrieverruck.us/events/leave`,
+                          `https://api.retrieverruck.us/events/leave`,
                           requestOptions
                         );
                       }}

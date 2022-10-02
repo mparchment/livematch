@@ -67,6 +67,15 @@ function Map({ location, fields, setOpen, setSelectedEvents }) {
           </Popup>
         </Marker>
       ))}
+      <Marker
+        position={[location.lat, location.lon]}
+        icon={
+          new Icon({
+            iconUrl: markerIconPng,
+            iconSize: [15, 24],
+          })
+        }
+      ></Marker>
     </MapContainer>
   );
 }
