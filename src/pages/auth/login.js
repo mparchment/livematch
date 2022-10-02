@@ -37,9 +37,14 @@ const FormContainer = styled(`div`)({
   marginBottom: 30,
 });
 
-export const Login = () => {
+export const Login = ({ appid, setAppid }) => {
   const [lastname, setLastname] = useState("");
   const [username, setUsername] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (appid !== "") return navigate("/home");
+  }, []);
 
   const login = () => {
     const requestOptions = {
@@ -47,11 +52,15 @@ export const Login = () => {
       headers: { "Content-Type": "application/json" },
     };
     fetch(
-      `http://api.retrieverruck.us:3000/users/login?lastname=${lastname}&username=${username}`,
+      `https://api.retrieverruck.us/users/login?lastname=${lastname}&username=${username}`,
       requestOptions
     )
       .then((response) => response.json())
-      .then((data) => localStorage.setItem("appid", data.data.appid));
+      .then((data) => {
+        localStorage.setItem("appid", data.data.appid);
+        setAppid(data.data.appid);
+        return navigate("/home");
+      });
   };
 
   return (

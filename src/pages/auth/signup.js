@@ -2,7 +2,7 @@ import { Button, TextField, Card as CardMui, Typography } from "@mui/material";
 import styled from "styled-components";
 import bgImg from "../../assets/img/flag_background.png";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Container = styled(`div`)({
   display: "flex",
@@ -36,12 +36,15 @@ const FormContainer = styled(`div`)({
   marginBottom: 30,
 });
 
-export const Signup = () => {
+export const Signup = ({ appid }) => {
   const [firstname, setFirstname] = useState("");
   const [username, setUsername] = useState("");
   const [lastname, setLastname] = useState("");
-
-  const signup = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (appid !== "") return navigate("/home");
+  }, []);
+  const signup = ({ setAppid }) => {
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -51,9 +54,13 @@ export const Signup = () => {
         lastname: lastname,
       }),
     };
-    fetch(`http://api.retrieverruck.us:3000/users/signup`, requestOptions)
+    fetch(`s://api.retrieverruck.us/users/signup`, requestOptions)
       .then((response) => response.json())
-      .then((data) => localStorage.setItem("appid", data.data.appid));
+      .then((data) => {
+        localStorage.setItem("appid", data.data.appid);
+        setAppid(data.data.appid);
+        return navigate("/home");
+      });
   };
 
   return (

@@ -39,7 +39,7 @@ function Landing({ appid }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (appid && appid !== "") return navigate("/home");
+    if (appid !== "") return navigate("/home");
   }, []);
 
   return (

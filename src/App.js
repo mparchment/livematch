@@ -22,13 +22,21 @@ export const Main = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline enableColorScheme />
       <Routes>
         {/* <Route path="/map" element={<App />} /> */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route
+          path="/login"
+          element={<Login appid={appid} setAppid={setAppid} />}
+        />
+        <Route
+          path="/signup"
+          element={<Signup appid={appid} setAppid={setAppid} />}
+        />
         <Route path="/" element={<Landing appid={appid} />} />
-        <Route path="/home" element={<Home />} />
+        <Route
+          path="/home"
+          element={<Home appid={appid} setAppid={setAppid} />}
+        />
       </Routes>
     </ThemeProvider>
   );
