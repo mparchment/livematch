@@ -31,8 +31,8 @@ function Map({ location }) {
         icon={
           new Icon({
             iconUrl: markerIconPng,
-            iconSize: [25, 41],
-            iconAnchor: [12, 41],
+            iconSize: [48, 48],
+            iconAnchor: [24, 46],
           })
         }
       ></Marker>
