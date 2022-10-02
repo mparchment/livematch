@@ -47,7 +47,7 @@ export const Login = () => {
       headers: { "Content-Type": "application/json" },
     };
     fetch(
-      `http://localhost:3002/users/login?lastname=${lastname}&username=${username}`,
+      `http://api.retrieverruck.us:3000/users/login?lastname=${lastname}&username=${username}`,
       requestOptions
     )
       .then((response) => response.json())

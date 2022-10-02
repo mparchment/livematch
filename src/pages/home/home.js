@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Map from "./Map";
 import io from "socket.io-client";
 
-const socket = io.connect("http://localhost:3001");
+const socket = io.connect("http://api.retrieverruck.us:3000");
 
 export const Home = () => {
   const [location, setLocation] = useState({

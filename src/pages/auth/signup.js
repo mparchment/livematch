@@ -51,7 +51,7 @@ export const Signup = () => {
         lastname: lastname,
       }),
     };
-    fetch(`http://localhost:3002/users/signup`, requestOptions)
+    fetch(`http://api.retrieverruck.us:3000/users/signup`, requestOptions)
       .then((response) => response.json())
       .then((data) => localStorage.setItem("appid", data.data.appid));
   };
