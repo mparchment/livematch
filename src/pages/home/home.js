@@ -196,6 +196,7 @@ export const Home = ({ appid, setAppid }) => {
                         marginLeft: "auto",
                       }}
                       onClick={() => {
+                        console.log(event);
                         const requestOptions = {
                           method: "PUT",
                           headers: { "Content-Type": "application/json" },
@@ -208,7 +209,7 @@ export const Home = ({ appid, setAppid }) => {
                         fetch(
                           `https://api.retrieverruck.us/events/join`,
                           requestOptions
-                        );
+                        ).then(() => getSelectedEvents(event.location));
                       }}
                     >
                       <Typography fontSize={14}>Join</Typography>
@@ -232,7 +233,7 @@ export const Home = ({ appid, setAppid }) => {
                         fetch(
                           `https://api.retrieverruck.us/events/delete`,
                           requestOptions
-                        );
+                        ).then(() => getSelectedEvents(event.location));
                       }}
                     >
                       <Typography fontSize={14}>Delete</Typography>
@@ -242,6 +243,7 @@ export const Home = ({ appid, setAppid }) => {
                       style={{
                         marginLeft: "auto",
                       }}
+                      danger
                       onClick={() => {
                         const requestOptions = {
                           method: "PUT",
@@ -255,7 +257,7 @@ export const Home = ({ appid, setAppid }) => {
                         fetch(
                           `https://api.retrieverruck.us/events/leave`,
                           requestOptions
-                        );
+                        ).then(() => getSelectedEvents(event.location));
                       }}
                     >
                       <Typography fontSize={14}>Leave</Typography>
