@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Figtree:wght@900&display=swap');
 
+@font-face {
+    font-family: "Labor Union";
+    src: local("Labor Union"), url('./LaborUnion-Regular.ttf');
+    format("truetype");
+}
+
 .header-container {
     position: fixed;
     width: 100vw;
@@ -9,6 +15,18 @@
 h1 {
     text-align: center;
     font-family: 'Figtree', sans-serif;
+    color: #2d3436;
+    text-shadow: 6px 6px #fdcb6e;
+    font-weight: bold;
+    font-size: 64px;
+    margin-top: .25em;
+    letter-spacing: -2px;
+    font-variant: small-caps;
+}
+
+h4 {
+    text-align: center;
+    font-family: 'Labor Union', sans-serif;
     color: #2d3436;
     text-shadow: 6px 6px #fdcb6e;
     font-weight: bold;
