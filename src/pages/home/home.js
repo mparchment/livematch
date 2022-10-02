@@ -191,29 +191,31 @@ export const Home = ({ appid, setAppid }) => {
                     </TypographyMui>
                   </EventDescContainer>
                   {!event.attendees.includes(appid) ? (
-                    <Button
-                      style={{
-                        marginLeft: "auto",
-                      }}
-                      onClick={() => {
-                        console.log(event);
-                        const requestOptions = {
-                          method: "PUT",
-                          headers: { "Content-Type": "application/json" },
-                          body: JSON.stringify({
-                            event_id: event._id,
-                            user_id: appid,
-                          }),
-                        };
-                        //api.retrieverruck.us
-                        fetch(
-                          `https://api.retrieverruck.us/events/join`,
-                          requestOptions
-                        ).then(() => getSelectedEvents(event.location));
-                      }}
-                    >
-                      <Typography fontSize={14}>Join</Typography>
-                    </Button>
+                    event.attendees.length < event.max_players && (
+                      <Button
+                        style={{
+                          marginLeft: "auto",
+                        }}
+                        onClick={() => {
+                          console.log(event);
+                          const requestOptions = {
+                            method: "PUT",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({
+                              event_id: event._id,
+                              user_id: appid,
+                            }),
+                          };
+                          //api.retrieverruck.us
+                          fetch(
+                            `https://api.retrieverruck.us/events/join`,
+                            requestOptions
+                          ).then(() => getSelectedEvents(event.location));
+                        }}
+                      >
+                        <Typography fontSize={14}>Join</Typography>
+                      </Button>
+                    )
                   ) : event.owner === appid ? (
                     <Button
                       style={{
